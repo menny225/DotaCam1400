@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31919.166
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotaCam1400", "DotaCam1400.csproj", "{DB7476DF-1B6F-4575-BB8D-797A1F03F4A7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DB7476DF-1B6F-4575-BB8D-797A1F03F4A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB7476DF-1B6F-4575-BB8D-797A1F03F4A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB7476DF-1B6F-4575-BB8D-797A1F03F4A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB7476DF-1B6F-4575-BB8D-797A1F03F4A7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {304B0386-1A53-4132-9EBA-2BA9E35D3CD7}
+	EndGlobalSection
+EndGlobal
