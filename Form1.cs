@@ -24,12 +24,11 @@ namespace DotaCam1400
 
         private async void Form1_Load(object sender, EventArgs e)
         {
-            RegistryKey key = Registry.ClassesRoot.OpenSubKey(@"Applications\notepad++.exe\shell\open\command");
-            string npp = key.GetValue("").ToString().Replace("\"%1\"", "");
-            key.Close();
-            key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Valve\Steam");
-            string file = key.GetValue("SteamPath").ToString().Replace("/", "\\") + @"\steamapps\common\dota 2 beta\game\dota\bin\win64\client.dll";
-            key.Close();
+            string npp, file;
+            using (RegistryKey key = Registry.ClassesRoot.OpenSubKey(@"Applications\notepad++.exe\shell\open\command"))
+                npp = key.GetValue("").ToString().Replace("\"%1\"", "");
+            using (RegistryKey key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Valve\Steam"))
+                file = key.GetValue("SteamPath").ToString().Replace("/", "\\") + @"\steamapps\common\dota 2 beta\game\dota\bin\win64\client.dll";
             Cmd($"start \"\" {npp} -multiInst \"{file}\"");
             await Task.Delay(800);
             SendKeys.Send("{F9}");
