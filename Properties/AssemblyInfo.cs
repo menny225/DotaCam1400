@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Общие сведения об этой сборке предоставляются следующим набором
 // набора атрибутов. Измените значения этих атрибутов для изменения сведений,
 // связанных со сборкой.
-[assembly: AssemblyTitle("DotaCam1400")]
+[assembly: AssemblyTitle("DotaCamChanger")]
 [assembly: AssemblyDescription("Отдаление камеры в Dota 2")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("MennyCo")]
-[assembly: AssemblyProduct("DotaCam1400")]
+[assembly: AssemblyProduct("Modify")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("menny225")]
 [assembly: AssemblyCulture("")]
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // Можно задать все значения или принять номера сборки и редакции по умолчанию 
 // используя "*", как показано ниже:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.2.2.5")]
-[assembly: AssemblyFileVersion("0.2.2.5")]
+[assembly: AssemblyVersion("0.0.0.225")]
+[assembly: AssemblyFileVersion("0.0.0.225")]
