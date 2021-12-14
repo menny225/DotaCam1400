@@ -69,22 +69,5 @@ namespace DotaCam1400.Properties {
                 return ((System.Drawing.Icon)(obj));
             }
         }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
-        ///&lt;NotepadPlus&gt;
-        ///    &lt;InternalCommands /&gt;
-        ///    &lt;Macros&gt;
-        ///        &lt;Macro name=&quot;DotaCam&quot; Ctrl=&quot;no&quot; Alt=&quot;no&quot; Shift=&quot;no&quot; Key=&quot;120&quot;&gt;
-        ///            &lt;Action type=&quot;3&quot; message=&quot;1700&quot; wParam=&quot;0&quot; lParam=&quot;0&quot; sParam=&quot;&quot; /&gt;
-        ///            &lt;Action type=&quot;3&quot; message=&quot;1601&quot; wParam=&quot;0&quot; lParam=&quot;0&quot; sParam=&quot;Maximum visible distance&quot; /&gt;
-        ///            &lt;Action type=&quot;3&quot; message=&quot;1625&quot; wParam=&quot;0&quot; lParam=&quot;0&quot; sParam=&quot;&quot; /&gt;
-        ///            &lt;Action type=&quot;3&quot; message=&quot;1702&quot; wParam=&quot;0&quot; lParam=&quot;256&quot; sParam=&quot;&quot; /&gt; [остаток строки не уместился]&quot;;.
-        /// </summary>
-        public static string shortcuts {
-            get {
-                return ResourceManager.GetString("shortcuts", resourceCulture);
-            }
-        }
     }
 }
