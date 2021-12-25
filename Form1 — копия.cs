@@ -15,43 +15,45 @@ namespace DotaCam1400
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            string file, EditTime;
+            //Поиск расположения Файла client.dll
+            using (RegistryKey key = Registry.ClassesRoot.OpenSubKey(@"dota2\Shell\Open\Command"))
+                file = Regex.Match(key.GetValue("").ToString(), "[^a-z](.*?.game?)").Groups[1].Value + @"\dota\bin\win64\client.dll";
+
+            //Считывание даты последнего изменения файла client.dll
+            using (RegistryKey key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\DotaCam1400"))
+                EditTime = key?.GetValue("EditTime")?.ToString();
+
             // Модификация файла в случае разности в дате редактирования
-            if (EditTime() != File.GetLastWriteTime(FindDLL()).ToString())
-                Modify(FindDLL());
+            if (EditTime != File.GetLastWriteTime(file).ToString())
+            {
+                //Модификация
+                Modify(file, "3132303000", "3134303000");
+
+                //Информирование об успешной модификации
+                MessageBox.Show("Файл успешно модифицирован!", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+            }
             else
-            if (MessageBox.Show("Файл уже модифицирован! \n\nОткатить изменения?", "Информация", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                Modify(FindDLL(), restore: true);
+            if (MessageBox.Show("Файл уже модифицирован! \nОткатить изменения?", "Ошибка", MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2, MessageBoxOptions.ServiceNotification) == DialogResult.Yes)
+            {
+                Modify(file, restore: true);
+                MessageBox.Show("Файл успешно восстановлен!", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+            }
             Close();
         }
 
-        //Считывание даты последнего изменения файла client.dll
-        public static string EditTime()
-        {
-            using (RegistryKey key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\DotaCam1400"))
-                return key?.GetValue("EditTime")?.ToString();
-        }
-
-        //Поиск расположения Файла client.dll
-        public static string FindDLL()
-        {
-            using (RegistryKey key = Registry.ClassesRoot.OpenSubKey(@"dota2\Shell\Open\Command"))
-                return Regex.Match(key?.GetValue("").ToString(), "[^a-z](.*?.game?)").Groups[1].Value + @"\dota\bin\win64\client.dll";
-        }
-
-        //Механизм модификации
-        public static void Modify(string file, bool restore = false)
+        public static void Modify(string file, string source = "3134303000", string target = "3132303000", bool restore = false)
         {
             //Модификация файла
-            BinaryReplace($"{file}", StringHexToByteArray(restore ? "3134303000": "3132303000"), $"{file.Replace("client.dll", "client_path.dll")}", StringHexToByteArray(restore ? "3132303000" : "3134303000"));
+            byte[] sourceBytes = StringHexToByteArray($"{source}");
+            byte[] targetBytes = StringHexToByteArray($"{target}");
+            BinaryReplace($"{file}", sourceBytes, $"{file.Replace("client.dll", "client_path.dll")}", targetBytes);
             File.Delete(file);
             File.Move(file.Replace("client.dll", "client_path.dll"), file);
 
             //Запись даты модификации
             using (RegistryKey key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\DotaCam1400"))
                 key?.SetValue("EditTime", restore ? "" : DateTime.Now.ToString());
-
-            //Информирование об успешной модификации
-            MessageBox.Show(restore ? "Файл успешно восстановлен!":"Файл успешно модифицирован!", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         //Механизм поиска и замены нужных байт в файле
